@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { TokenData } from './fcdata.model';
 @Component({
@@ -6,7 +6,7 @@ import { TokenData } from './fcdata.model';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   fcData: TokenData = {
     totalSupply: 100000000000,
     burnedTokens: 5521472485,
@@ -36,7 +36,7 @@ export class HomePage {
   }
 
   loadLocalTokensBurned() {
-    const stringValue = localStorage.getItem('tokensBurned');
+    const stringValue = localStorage.getItem('fc_tokensBurned');
     const value = parseFloat(stringValue);
 
     if (!isNaN(value)) {
@@ -45,7 +45,7 @@ export class HomePage {
   }
 
   loadLocalDailyVolume() {
-    const stringValue = localStorage.getItem('dailyVolume');
+    const stringValue = localStorage.getItem('fc_dailyVolume');
     const value = parseFloat(stringValue);
 
     if (!isNaN(value)) {
@@ -54,7 +54,7 @@ export class HomePage {
   }
 
   loadLocalCakePrice() {
-    const stringValue = localStorage.getItem('cakePrice');
+    const stringValue = localStorage.getItem('fc_cakePrice');
     const value = parseFloat(stringValue);
 
     if (!isNaN(value)) {
@@ -63,7 +63,7 @@ export class HomePage {
   }
 
   loadLocalTokensHeld() {
-    const stringValue = localStorage.getItem('tokensHeld');
+    const stringValue = localStorage.getItem('fc_tokensHeld');
     const value = parseFloat(stringValue);
 
     if (!isNaN(value)) {
@@ -101,7 +101,10 @@ export class HomePage {
       this.calculateRewards();
 
       // save to local storage
-      localStorage.setItem('tokensBurned', this.fcData.burnedTokens.toString());
+      localStorage.setItem(
+        'fc_tokensBurned',
+        this.fcData.burnedTokens.toString()
+      );
     }
   }
 
@@ -114,7 +117,10 @@ export class HomePage {
       this.calculateRewards();
 
       // save to local storage
-      localStorage.setItem('dailyVolume', this.fcData.dailyVolume.toString());
+      localStorage.setItem(
+        'fc_dailyVolume',
+        this.fcData.dailyVolume.toString()
+      );
     }
   }
 
@@ -127,7 +133,7 @@ export class HomePage {
       this.calculateRewards();
 
       // save to local storage
-      localStorage.setItem('tokensHeld', this.fcData.tokensHeld.toString());
+      localStorage.setItem('fc_tokensHeld', this.fcData.tokensHeld.toString());
     }
   }
 
@@ -140,7 +146,7 @@ export class HomePage {
       this.calculateRewards();
 
       // save to local storage
-      localStorage.setItem('cakePrice', this.fcData.cakePrice.toString());
+      localStorage.setItem('fc_cakePrice', this.fcData.cakePrice.toString());
     }
   }
 }
