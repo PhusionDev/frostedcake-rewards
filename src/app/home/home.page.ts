@@ -1,19 +1,20 @@
 import { Component } from '@angular/core';
 
-import { FcData } from './fcdata.model';
+import { TokenData } from './fcdata.model';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  fcData: FcData = {
-    totalSupply: 1000000000000000,
-    burnedTokens: 514725329117038,
-    circulatingSupply: 1000000000000,
-    rewardPercent: 0.08,
+  fcData: TokenData = {
+    totalSupply: 100000000000,
+    burnedTokens: 5521472485,
+    circulatingSupply: 0,
+    rewardPercent: 0.04,
     dailyVolume: 1000000,
-    fcHeld: 5000000000,
+    tokensHeld: 25000000,
+    cakePrice: 19.756,
   };
 
   public rewards = 0;
@@ -39,7 +40,7 @@ export class HomePage {
   }
 
   effectivePercentage() {
-    return this.fcData.fcHeld / this.fcData.circulatingSupply;
+    return this.fcData.tokensHeld / this.fcData.circulatingSupply;
   }
 
   // onChange Methods
@@ -64,12 +65,22 @@ export class HomePage {
     }
   }
 
-  onChangeEgcHeld(event: Event) {
+  onChangeTokensHeld(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     const parsedValue = parseFloat(value);
 
     if (!isNaN(parsedValue)) {
-      this.fcData.fcHeld = parsedValue;
+      this.fcData.tokensHeld = parsedValue;
+      this.calculateRewards();
+    }
+  }
+
+  onChangeCakePrice(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    const parsedValue = parseFloat(value);
+
+    if (!isNaN(parsedValue)) {
+      this.fcData.cakePrice = parsedValue;
       this.calculateRewards();
     }
   }

@@ -26,6 +26,7 @@
               [value]="fcData.burnedTokens"
               (input)="onChangeTokensBurned($event)"
               color="primary"
+              autocomplete="off"
             ></ion-input>
           </ion-item>
 
@@ -36,6 +37,7 @@
               [value]="fcData.dailyVolume"
               (input)="onChangeDailyVolume($event)"
               color="primary"
+              autocomplete="off"
             ></ion-input>
           </ion-item>
 
@@ -51,7 +53,25 @@
 
           <ion-item>
             <ion-label>Rewards %</ion-label>
-            <ion-label>{{egcData.rewardPercent | percent:'1.2'}}</ion-label>
+            <ion-label>{{fcData.rewardPercent | percent:'1.2'}}</ion-label>
+          </ion-item>
+        </ion-card>
+
+        <br />
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>CAKE Token Data</ion-card-title>
+          </ion-card-header>
+
+          <ion-item>
+            <ion-label>Cake Token Price</ion-label>
+            <ion-input
+              [value]="fcData.cakePrice"
+              class="ion-text-center"
+              (input)="onChangeCakePrice($event)"
+              color="primary"
+              autocomplete="off"
+            ></ion-input>
           </ion-item>
         </ion-card>
 
@@ -62,12 +82,13 @@
           </ion-card-header>
 
           <ion-item>
-            <ion-label>EGC Held</ion-label>
+            <ion-label>FROSTEDCAKE Held</ion-label>
             <ion-input
-              [value]="fcData.egcHeld"
+              [value]="fcData.tokensHeld"
               class="ion-text-center"
-              (input)="onChangeEgcHeld($event)"
+              (input)="onChangeTokensHeld($event)"
               color="primary"
+              autocomplete="off"
             ></ion-input>
           </ion-item>
 
@@ -77,8 +98,13 @@
           </ion-item>
 
           <ion-item>
-            <ion-label>Daily Rewards</ion-label>
+            <ion-label>Daily Rewards (in $)</ion-label>
             <ion-label>{{rewards | currency:'USD':true:'1.2-4'}}</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Daily Rewards (in $CAKE)</ion-label>
+            <ion-label>{{rewards/fcData.cakePrice | number:'1.0-6'}}</ion-label>
           </ion-item>
         </ion-card>
       </ion-col>

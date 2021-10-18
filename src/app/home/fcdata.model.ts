@@ -1,8 +1,9 @@
-export interface FcData {
+export interface TokenData {
   totalSupply: number;
   burnedTokens: number;
   circulatingSupply: number;
   rewardPercent: number;
   dailyVolume: number;
-  fcHeld: number;
+  tokensHeld: number;
+  cakePrice: number;
 }
