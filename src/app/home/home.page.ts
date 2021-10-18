@@ -24,6 +24,53 @@ export class HomePage {
     this.calculateRewards();
   }
 
+  ngOnInit() {
+    this.loadLocalStorage();
+  }
+
+  loadLocalStorage() {
+    this.loadLocalTokensBurned();
+    this.loadLocalDailyVolume();
+    this.loadLocalCakePrice();
+    this.loadLocalTokensHeld();
+  }
+
+  loadLocalTokensBurned() {
+    const stringValue = localStorage.getItem('tokensBurned');
+    const value = parseFloat(stringValue);
+
+    if (!isNaN(value)) {
+      this.fcData.burnedTokens = value;
+    }
+  }
+
+  loadLocalDailyVolume() {
+    const stringValue = localStorage.getItem('dailyVolume');
+    const value = parseFloat(stringValue);
+
+    if (!isNaN(value)) {
+      this.fcData.dailyVolume = value;
+    }
+  }
+
+  loadLocalCakePrice() {
+    const stringValue = localStorage.getItem('cakePrice');
+    const value = parseFloat(stringValue);
+
+    if (!isNaN(value)) {
+      this.fcData.cakePrice = value;
+    }
+  }
+
+  loadLocalTokensHeld() {
+    const stringValue = localStorage.getItem('tokensHeld');
+    const value = parseFloat(stringValue);
+
+    if (!isNaN(value)) {
+      this.fcData.tokensHeld = value;
+    }
+  }
+
   updateCirculatingSupply() {
     this.fcData.circulatingSupply =
       this.fcData.totalSupply - this.fcData.burnedTokens;
@@ -52,6 +99,9 @@ export class HomePage {
       this.fcData.burnedTokens = parsedValue;
       this.updateCirculatingSupply();
       this.calculateRewards();
+
+      // save to local storage
+      localStorage.setItem('tokensBurned', this.fcData.burnedTokens.toString());
     }
   }
 
@@ -62,6 +112,9 @@ export class HomePage {
     if (!isNaN(parsedValue)) {
       this.fcData.dailyVolume = parsedValue;
       this.calculateRewards();
+
+      // save to local storage
+      localStorage.setItem('dailyVolume', this.fcData.dailyVolume.toString());
     }
   }
 
@@ -72,6 +125,9 @@ export class HomePage {
     if (!isNaN(parsedValue)) {
       this.fcData.tokensHeld = parsedValue;
       this.calculateRewards();
+
+      // save to local storage
+      localStorage.setItem('tokensHeld', this.fcData.tokensHeld.toString());
     }
   }
 
@@ -82,6 +138,9 @@ export class HomePage {
     if (!isNaN(parsedValue)) {
       this.fcData.cakePrice = parsedValue;
       this.calculateRewards();
+
+      // save to local storage
+      localStorage.setItem('cakePrice', this.fcData.cakePrice.toString());
     }
   }
 }
