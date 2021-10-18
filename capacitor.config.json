@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "frostedcake-rewards",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

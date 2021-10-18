@@ -1,0 +1,7 @@
+{
+  "name": "frostedcake-rewards",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
